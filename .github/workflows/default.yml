@@ -1,0 +1,33 @@
+name: CI with SBOM Generation
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Generate SBOM YAML
+      - name: Generate SBOM
+        uses: opencontextinc/generate-sbom-yaml@v1.0.1
+        with:
+          upload_yaml: true
+
+      # Example build step
+      - name: Run a one-line script
+        run: echo "Hello, world!"
+
+      # Example multi-line script
+      - name: Run a multi-line script
+        run: |
+          echo "Add other actions to build,"
+          echo "test, and deploy your project."
